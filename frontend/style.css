@@ -1,0 +1,162 @@
+/* Global Pixelated Look */
+body.pixelated {
+  margin: 0;
+  padding: 0;
+  background: #111;
+  color: #8f8;
+  font-family: 'Press Start 2P', monospace;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+  overflow: hidden;
+}
+
+/* Utility */
+.hidden { display: none !important; }
+.overlay {
+  position: absolute; inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  z-index: 10;
+  font-size: 1rem;
+  text-shadow: 0 0 4px #4f4;
+}
+
+/* Hero Styles */
+#hero {
+  position: absolute; inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  text-align: center;
+}
+.title {
+  font-size: 3rem;
+  color: #4f4;
+  text-shadow: 0 0 8px #4f4;
+  margin-bottom: 0.5rem;
+}
+.tagline {
+  font-size: 1rem;
+  color: #afa;
+  margin-bottom: 1.5rem;
+}
+.btn-hero {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  color: #4f4;
+  background: transparent;
+  border: 2px solid #4f4;
+  text-shadow: 0 0 4px #4f4;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-hero:hover {
+  background: rgba(79,255,79,0.1);
+}
+.map-preview {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 0.5rem;
+  background: #222;
+  border: 2px solid #4f4;
+}
+.sprite-demo {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  border: 1px solid #4f4;
+}
+
+/* Game Styles */
+#game-container {
+  position: absolute; inset: 0;
+  background: #080808;
+}
+#canvas {
+  border: 2px solid #4f4;
+  display: block;
+  margin: auto;
+  image-rendering: pixelated;
+}
+
+/* HUD */
+.hud {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  border: 4px solid #4f4;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  box-shadow: 0 0 8px #4f4;
+}
+.btn-group {
+  display: flex;
+  gap: 8px;
+}
+.btn-game {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  padding: 8px 16px;
+  color: #afa;
+  background: url('sprites/hufa_bg.png');
+  background-size: cover;
+  border: 2px solid #4f4;
+  cursor: pointer;
+  transition: transform 0.1s, background-color 0.1s;
+}
+.btn-game:hover {
+  transform: scale(1.05);
+  background-color: rgba(79, 255, 79, 0.2);
+}
+.btn-game:active {
+  transform: scale(0.95);
+}
+
+/* Resource Display */
+#resources {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #4f4;
+  padding: 8px;
+  color: #afa;
+  font-size: 0.7rem;
+  text-shadow: 0 0 4px #4f4;
+}
+
+/* Minimap */
+.minimap {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #4f4;
+  padding: 4px;
+}
+#minimap-canvas {
+  image-rendering: pixelated;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title { font-size: 2rem; }
+  .btn-hero, .btn-game { font-size: 0.6rem; padding: 0.4rem 0.8rem; }
+  .map-preview { gap: 0.25rem; }
+  #resources { font-size: 0.6rem; }
+  .minimap { transform: scale(0.8); }
+}
+
+#ui, #canvas, #minimap-canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}

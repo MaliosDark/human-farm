@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMAN FARM - Game Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+            color: #ffffff;
+            font-family: 'Press Start 2P', cursive;
+            overflow-x: hidden;
+        }
+        /* ── Static Background for Top Section ─────────────────────────── */
+        #pixi-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            background: url('sprites/hufa_bg.png') center center;
+            background-size: cover;
+        }
+        #pixi-container h1 {
+            color: #00ff00;
+            text-shadow: 0 0 8px #00ff00aa;
+            font-size: 2rem;
+            margin: 0;
+        }
+        #guide {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #111;
+            border: 4px solid #ff00ff;
+            box-shadow: 0 0 20px #ff00ff80;
+        }
+        h1, h2, h3 {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff0080;
+            text-align: center;
+        }
+        p, ul {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+        ul {
+            list-style: square;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px solid #00ff00;
+            background: #222;
+        }
+        .highlight {
+            color: #ff00ff;
+            text-shadow: 0 0 5px #ff00ff80;
+        }
+        button {
+            font-family: 'Press Start 2P', cursive;
+            background: #00ff00;
+            color: #000;
+            border: 2px solid #ffffff;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 10px auto;
+            display: block;
+            transition: background .2s, color .2s;
+        }
+        button:hover {
+            background: #00ff00; /* sin cambiar fondo */
+            color: #fff;
+        }
+        /* Go Back button styling */
+        #btn-back {
+            background: #ff00ff;
+            color: #000;
+            margin-top: 0;
+        }
+        #btn-back:hover {
+            background: #ff00ff; /* sin cambio en hover */
+        }
+    </style>
+</head>
+<body>
+    <div id="pixi-container"></div>
+    <button id="btn-back" onclick="window.location.href='index.html'">GO BACK</button>
+    <div id="guide">
+        <h1>🌌 HUMAN FARM: Game Guide 🌌</h1>
+        <p>Welcome to the wild, dystopian world of <span class="highlight">HUMAN FARM</span>! Ready to manage, mutate, and exploit your way to galactic domination? Buckle up, because this pixelated strategy game is gonna blow your mind! 🚀</p>
+
+        <div class="section">
+            <h2>🧠 What's HUMAN FARM?</h2>
+            <p>You're the boss of a creepy bio-engineering facility, creating genetically modified humans to mine <span class="highlight">Essence</span>, a super-valuable resource. Build your base, upgrade your humans, raid other players, and wrestle with some *seriously* tough moral choices. It’s strategy, it’s dark, it’s pixelated, and it’s FUN!</p>
+        </div>
+
+        <div class="section">
+            <h2>🎮 How to Play</h2>
+            <p>Jump into the game right in your browser—no downloads needed! Here’s the lowdown:</p>
+            <ul>
+                <li><span class="highlight">Create Humans:</span> Spawn new humans with unique traits. Each one’s got their own vibe—some are loyal, some are troublemakers!</li>
+                <li><span class="highlight">Assign Jobs:</span> Put your humans to work on your 10x10 isometric grid. Send them to Farms (to mine Essence), Labs (to get mutated), or Guard Posts (to fend off raiders).</li>
+                <li><span class="highlight">Extract Essence:</span> Collect that sweet, sweet Essence to upgrade your humans or unlock cool tech like auto-collectors or stealth raids.</li>
+                <li><span class="highlight">Raid or Defend:</span> Scout other players’ bases on the global map. Steal their Essence or kidnap their humans—but watch out, they can hit you back!</li>
+                <li><span class="highlight">Mind the Morality:</span> Overwork your humans, and they’ll rebel. Treat them nice, and they might stick around. Every choice matters!</li>
+            </ul>
+            <p>Pro tip: Keep an eye on your humans’ <span class="highlight">Fatigue</span> and <span class="highlight">Morality</span>. Push them too hard, and they might die, revolt, or just run away. 😱</p>
+        </div>
+
+        <div class="section">
+            <h2>🧬 Humans: Your Creepy Workforce</h2>
+            <p>Each human is unique, with stats like:</p>
+            <ul>
+                <li><span class="highlight">Essence/hr:</span> How fast they mine.</li>
+                <li><span class="highlight">Mutation:</span> Special powers (or curses).</li>
+                <li><span class="highlight">Morality:</span> High = loyal, Low = trouble.</li>
+                <li><span class="highlight">Fatigue:</span> Too high, and they’re toast.</li>
+            </ul>
+            <p>Upgrade them in the Lab, but don’t push too far—low morality humans might start a <span class="highlight">Rebellion Event</span> and wreck your base!</p>
+        </div>
+
+        <div class="section">
+            <h2>🧱 Build Your Empire</h2>
+            <p>Your 10x10 grid is where the magic happens. Build stuff like:</p>
+            <ul>
+                <li><span class="highlight">Farms:</span> Where Essence gets made.</li>
+                <li><span class="highlight">Labs:</span> For cloning and upgrading humans.</li>
+                <li><span class="highlight">Guard Posts:</span> To stop pesky raiders.</li>
+                <li><span class="highlight">Storage Units:</span> Hold extra Essence.</li>
+            </ul>
+            <p>Everything’s rendered in glorious isometric pixel art, with animations for working humans, glowing Essence, and epic raids!</p>
+        </div>
+
+        <div class="section">
+            <h2>⚔️ Raid Like a Boss</h2>
+            <p>Feeling sneaky? Use the minimap to scout other players’ bases. If their defenses are weak, send in your raiders to steal Essence or capture humans. But beef up your own Guard Posts, or you’ll be the one crying!</p>
+            <p>Raids are all about strategy—pick your targets wisely and time your attacks for maximum chaos. 😈</p>
+        </div>
+
+        <div class="section">
+            <h2>🧪 Morality: The Heart of the Game</h2>
+            <p>Every choice you make affects your humans’ <span class="highlight">Morality</span>. Overwork them? -15 points. Clone them without consent? -25. Give them a break? +10. Free a human? +30!</p>
+            <p>If morality drops too low, you’re in for a <span class="highlight">Rebellion Event</span>. Humans might attack your buildings, stop working, or take over part of your grid. Handle it by negotiating, reprogramming, or... well, you know. 🔫</p>
+        </div>
+
+        <div class="section">
+            <h2>🌟 Keep It Fun!</h2>
+            <p>Complete daily quests, climb the leaderboards, and unlock cool cosmetics or rare humans. Share epic raid replays or show off your unique humans on social media. The game’s dark, but the fun is real!</p>
+            <p>Ready to dive in? Just head to the game URL, and you’re good to go. No downloads, no hassle—just pure pixelated chaos!</p>
+            <button onclick="window.location.href='/game.html'">Play HUMAN FARM Now! 🚀</button>
+        </div>
+        <button id="btn-back" onclick="window.location.href='index.html'">GO BACK</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.4.2/pixi.min.js"></script>
+    <script>
+        // PixiJS setup for a fun animated background
+        const app = new PIXI.Application({
+            width: window.innerWidth,
+            height: 0,
+            backgroundColor: 0x2e2e2e,
+            antialias: false, // Keep it pixelated!
+        });
+        document.getElementById('pixi-container').appendChild(app.view);
+
+        // Load pixelated font for text
+        const style = new PIXI.TextStyle({
+            fontFamily: 'Press Start 2P',
+            fontSize: 24,
+            fill: 0x00ff00,
+            stroke: 0xff00ff,
+            strokeThickness: 4,
+            dropShadow: true,
+            dropShadowColor: 0x000000,
+            dropShadowDistance: 5,
+        });
+
+        // Add animated title
+        const title = new PIXI.Text('HUMAN FARM', style);
+        title.x = app.screen.width / 2;
+        title.y = 100;
+        title.anchor.set(0.5);
+        app.stage.addChild(title);
+
+        // Simple animation: make title pulse
+        let scale = 1;
+        let growing = true;
+        app.ticker.add(() => {
+            if (growing) {
+                scale += 0.005;
+                if (scale > 1.1) growing = false;
+            } else {
+                scale -= 0.005;
+                if (scale < 0.9) growing = true;
+            }
+            title.scale.set(scale);
+        });
+
+        // Add some isometric pixel art flair (mock grid)
+        // const gridSize = 50;
+        // for (let x = 0; x < 5; x++) {
+        //     for (let y = 0; y < 5; y++) {
+        //         const tile = new PIXI.Graphics();
+        //         tile.lineStyle(2, 0x00ff00);
+        //         tile.beginFill(0x222222);
+        //         const isoX = (x - y) * gridSize / 2 + app.screen.width / 2;
+        //         const isoY = (x + y) * gridSize / 4 + 50;
+        //         tile.drawPolygon([
+        //             isoX, isoY,
+        //             isoX + gridSize / 2, isoY + gridSize / 4,
+        //             isoX, isoY + gridSize / 2,
+        //             isoX - gridSize / 2, isoY + gridSize / 4
+        //         ]);
+        //         tile.endFill();
+        //         app.stage.addChild(tile);
+        //     }
+        // }
+    </script>
+</body>
+</html>

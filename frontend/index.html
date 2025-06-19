@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Human Farm — Welcome</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- Pixel font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- p5.js -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.min.js"></script>
+  <style>
+    /* ── Global Reset & Pixel Look ───────────────────────────────────── */
+    html, body {
+      margin:0; padding:0;
+      width:100%; height:100%;
+      background:#111;
+      overflow:hidden;
+      image-rendering: pixelated;
+      font-family: 'Press Start 2P', monospace;
+      color:#afa;
+    }
+    canvas#bg {
+      position:absolute; top:0; left:0;
+      width:100%; height:100%;
+      image-rendering: pixelated;
+      z-index:0;
+    }
+
+    /* ── UI Frame Panel ─────────────────────────────────────────────── */
+    #ui {
+      position:absolute;
+      top:50%; left:50%;
+      transform: translate(-50%,-50%);
+      width:480px;
+      height:300px;
+      background: url('sprites/frame.png') no-repeat center;
+      background-size: 100% 100%;
+      pointer-events:none;
+      z-index:10;
+    }
+
+    /* ── Text Inside Frame ─────────────────────────────────────────── */
+    #ui .content {
+      position:absolute;
+      top:35px;    /* slightly lower */
+      left:20px; right:20px;
+      bottom:90px;
+      text-align:center;
+      display:flex; flex-direction:column; justify-content:center;
+    }
+    #ui h1 {
+      margin:0;
+      font-size:2rem;   /* a bit smaller */
+      text-shadow:0 0 6px #4f4;
+    }
+    #ui p {
+      margin:8px 0 0;
+      font-size:0.8rem; /* a bit smaller */
+      text-shadow:0 0 3px #4f4;
+    }
+
+    /* ── Pixel-Art Buttons ─────────────────────────────────────────── */
+    #ui .buttons {
+      position:absolute;
+      bottom:50px;
+      left:50%;
+      transform: translateX(-50%);
+      display:flex; gap:16px;
+      pointer-events:all;
+    }
+    #ui .btn {
+      width:160px;
+      height:40px;
+      background: url('sprites/button.png') no-repeat center/contain;
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.75rem;
+      color:#afa;
+      cursor:pointer;
+      user-select:none;
+      transition: transform 0.1s, box-shadow 0.2s;
+      /* no background-color change on hover */
+    }
+    #ui .btn:hover {
+      transform: translateY(-2px);
+    
+    }
+  </style>
+</head>
+
+<body>
+  <!-- drifting isometric-tile background -->
+  <canvas id="bg"></canvas>
+
+  <!-- Framed UI panel -->
+  <div id="ui">
+    <div class="content">
+      <br>
+      <h1>HUMAN FARM</h1>
+      <br>
+      <p>HARVEST HUMANS <br><br>&&amp;<br><br> EXTRACT ESSENCE</p>
+    </div>
+    <div class="buttons">
+      <div id="btn-play"  class="btn">PLAY NOW</div>
+      <div id="btn-guide" class="btn">GUIDE</div>
+    </div>
+  </div>
+
+  <script>
+    // Button handlers
+    document.getElementById('btn-play').addEventListener('click', () => {
+      window.location.href = 'game.html';
+    });
+    document.getElementById('btn-guide').addEventListener('click', () => {
+      window.location.href = 'guide.html';
+    });
+  </script>
+
+  <script>
+  let tileImg;
+
+  function preload() {
+    tileImg = loadImage('sprites/hufa_bg.png');
+  }
+
+  function setup() {
+    const c = createCanvas(windowWidth, windowHeight);
+    c.id('bg');
+    noSmooth();
+  }
+
+  function draw() {
+    background(8);
+    image(tileImg, 0, 0, width, height); // draw fullscreen background
+    noLoop(); // only draw once
+  }
+
+  function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    redraw(); // re-draw background after resize
+  }
+</script>
+
+</body>
+</html>
