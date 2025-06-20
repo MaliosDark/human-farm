@@ -3,58 +3,64 @@
 mod camera;
 mod assets;
 mod worker;
-mod game;
 mod mining;
 mod floating_text;
+mod game_init;
+mod game_loop;
 
-use std::{cell::RefCell, rc::Rc};
 use wasm_bindgen::prelude::*;
-use wasm_bindgen::JsCast;
-use web_sys::{window, HtmlCanvasElement};
+use wasm_bindgen::closure::Closure;
+use web_sys::window;
+use std::cell::RefCell;
 
-/* ----------------------------------------------------------------------------
-   Small guard so we run the engine only once, even if start_game() is clicked
-   multiple times or the Wasm module auto-initialises.
----------------------------------------------------------------------------- */
 thread_local! {
+    /// Prevent start_game from running twice
     static STARTED: RefCell<bool> = RefCell::new(false);
+    /// If true, auto‐mint every 5s
+    static AUTO_MINT: RefCell<bool> = RefCell::new(false);
 }
 
-fn boot() -> Result<(), JsValue> {
-    STARTED.with(|flag| {
-        if *flag.borrow() {
-            // already running – ignore duplicate call
+#[wasm_bindgen]
+pub fn start_game() -> Result<(), JsValue> {
+    STARTED.with(|started| {
+        if *started.borrow() {
             return Ok(());
         }
-        *flag.borrow_mut() = true;
+        *started.borrow_mut() = true;
 
-        // locate <canvas id="canvas"> and launch the Rust engine
-        let canvas: Rc<HtmlCanvasElement> =
-            Rc::new(window()
-                .ok_or("no window")?
-                .document()
-                .ok_or("no document")?
-                .get_element_by_id("canvas")
-                .ok_or("no canvas element")?
-                .dyn_into()?);
+        // Launch the real init
+        game_init::start_game()?;
 
-        game::start_game(canvas)
+        // If auto‐mint is on, schedule repeated mints
+        AUTO_MINT.with(|flag| {
+            if *flag.borrow() {
+                let cb = Closure::wrap(Box::new(move || {
+                    game_init::mint_human();
+                }) as Box<dyn Fn()>);
+                let _ = window().unwrap()
+                    .set_interval_with_callback_and_timeout_and_arguments_0(
+                        cb.as_ref().unchecked_ref(),
+                        5000,
+                    );
+                cb.forget();
+            }
+        });
+
+        Ok(())
     })
 }
 
-/* --------------------------------------------------------------------------
-   ①  Export the function your JS expects
--------------------------------------------------------------------------- */
 #[wasm_bindgen]
-pub fn start_game() -> Result<(), JsValue> {
-    boot()
+pub fn enable_auto_mint() {
+    AUTO_MINT.with(|f| *f.borrow_mut() = true);
 }
 
-/* --------------------------------------------------------------------------
-   ②  Provide an empty auto-start so Wasm binds correctly
-       (we DON’T call boot() here – you trigger it from JS by clicking Start)
--------------------------------------------------------------------------- */
-#[wasm_bindgen(start)]
-pub fn wasm_bindgen_start() {
-    // do nothing – wait for start_game() from JS
+#[wasm_bindgen]
+pub fn disable_auto_mint() {
+    AUTO_MINT.with(|f| *f.borrow_mut() = false);
 }
+
+// Entry stub so wasm binds correctly.
+// We don’t call start_game() here.
+#[wasm_bindgen(start)]
+pub fn wasm_bindgen_start() {}
